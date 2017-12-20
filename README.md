@@ -62,49 +62,50 @@ DHT22 DOUT引脚也可以接到其他gpio脚上，不过要相应的修改home_a
 第一步 确保SD卡刷了最新的raspbian jessie镜像
 第二步 系统启动，并连接了网络
 第三步 执行
-
+```
 sudo apt-get update
 sudo apt-get upgrade
- 
+``` 
 
 第四步 编辑 /boot/config.txt 添加一行
-
+```
 dtoverlay=pi3-miniuart-bt
- 
+```
 
  
 
 最后 禁用自带蓝牙
-
+```
 sudo systemctl disable hciuart
- 
+``` 
 
 释放串口
 
 
 编辑 /boot/cmdline.txt，默认是下面这样
-
+```
 dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait
- 
+```
 
 或者这样
-
+```
 dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 kgdboc=serial0,115200 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
- 
+``` 
 
 把console=ttyAMA0,console=serial0,kgdboc=***这两个参数删掉 变成下面这样
-
+```
 dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
- 
+```
 
 之后sudo reboot重启系统 串口就可以正常使用了
 
 安装软件依赖
-
+```
 1 sudo apt-get install python-requests python-lxml python-serial git build-essential python-dev
 2 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 3 cd Adafruit_Python_DHT
 4 sudo python ./setup.py install
+```
  
 
 准备串口屏幕的图片和字体资源
@@ -113,17 +114,17 @@ dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=d
 终于可以运行了～～
 
 在运行之前先编辑一下weather_time_render.py，找到下面2行，把注释取消掉，运行时会把屏幕TF卡中的文件加载到屏幕自带的NandFlash中，之后就不需要插TF卡了～～
-
+```
 1 # screen.load_pic()
 2 # time.sleep(5)
- 
+```
 
 运行脚本
-
+```
 1 sudo ./home_air_sensor.py
 2 ./weather_fetcher.py
 3 ./weather_time_render.py
-
+```
 
 
  
@@ -132,6 +133,13 @@ dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=d
 
  
 自动定时任务，就可以一直运行：
+```
+crontab epaper_clock.cron
+```
+查看定时任务：
+```
+crontab -l
+```
 
 本文是参考：github上两篇博客实现
 
