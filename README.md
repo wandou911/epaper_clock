@@ -21,18 +21,20 @@
 3、DHT22温湿度传感模块
 
 硬件连接
-屏幕|树莓派|物理接口
--|:-:|-:|
-DIN|TX(GPIO14)|8
-DOUT|RX(GPIO15)|10
-GND|GND|6
-VCC|3V|1
+
+|屏幕|树莓派|物理接口|
+|-|:-:|-:|
+|DIN|TX(GPIO14)|8|
+|DOUT|RX(GPIO15)|10|
+|GND|GND|6|
+|VCC|3V|1|
 
 DHT22|树莓派|物理接口
-- | :-: | -: |
+-|:-:|-:|
 DOUT|1-Wire(BCM4)|7
 GND|GND|9
 VCC|3V|17
+
 
 关于GND表示的是电源的负极，VCC表示电源正极
 
@@ -45,6 +47,8 @@ DHT22 DOUT引脚也可以接到其他gpio脚上，不过要相应的修改home_a
  树莓派3BGPIO图：
 
 ![树莓派3BGPIO图](http://images2015.cnblogs.com/blog/1044995/201704/1044995-20170401110742242-471509557.jpg)
+
+
 树莓派GPIO接口writing Pi, BCM, Board三种模式对应
 
 ![树莓派GPIO接口模式](http://images2017.cnblogs.com/blog/1044995/201712/1044995-20171217213946249-1431021000.png)
